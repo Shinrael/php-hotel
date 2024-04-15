@@ -53,6 +53,27 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </head>
 <body>
-  
+  <div class="container">
+    
+    <?php foreach($hotels as $hotel) :
+      $nome_albergo = $hotel['name'];
+      $descrizione = $hotel['description'];
+      $parcheggio = $hotel['parking'] ? 'si' : 'no';
+      $voto = $hotel['vote'];
+      $distanza_dal_centro = $hotel['distance_to_center'];
+      ?>
+      <ul class="fw-bold">
+      "<?php echo $nome_albergo ?>" 
+          <li class="fw-light">           
+            "<?php echo $descrizione ?>" -
+            "<?php echo $parcheggio ?>" -
+            "<?php echo $voto ?>" -
+            "<?php echo $distanza_dal_centro ?>" -
+          </li>
+
+      </ul>  
+    <?php endforeach ?>
+    
+  </div>
 </body>
 </html>
