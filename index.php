@@ -39,7 +39,6 @@
         ],
 
     ];
-
 ?>
 
 
@@ -53,9 +52,27 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </head>
 <body>
-  <div class="container d-flex pt-5">
+  <header class="d-flex text-center justify-content-center ">
+    <form method="GET" class="mb-4">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="parking" id="parkingCheckbox" value="1">
+        <label class="form-check-label" for="parkingCheckbox">
+            Mostra Hotel con parcheggio
+        </label>
+      </div>
+      <button type="submit" class="btn btn-primary">Vai</button>
+    </form>    
+  </header>
+  <div class="container d-flex pt-5">    
+    <?php 
+    $hotels_filtrati = $hotels;
+    if (isset($_GET['parking']) and $_GET['parking'] == '1') {
+        $hotels_filtrati = array_filter($hotels_filtrati, function($hotel) {
+            return $hotel['parking'];
+        });
+    }
     
-    <?php foreach($hotels as $hotel) : 
+    foreach($hotels_filtrati as $hotel) : 
       $nome_albergo = $hotel['name'];
       $descrizione = $hotel['description'];
       $parcheggio = $hotel['parking'] ? 'si' : 'no';
@@ -64,8 +81,8 @@
       ?>
         <div class="card me-3" style="width: 18rem;">
           <div class="card-body text-center ">
-            <h5 class="card-title"><?php echo $nome_albergo ?></h5>
-            <h6 class="card-subtitle mb-2 text-body-secondary"><?php echo $descrizione ?></h6>
+            <h5 class="card-title mb-4"><?php echo $nome_albergo ?></h5>
+            <h6 class="card-subtitle mb-4 text-body-secondary"><?php echo $descrizione ?></h6>
             <p class="card-text">Parcheggio: <?php echo $parcheggio ?></p>
             <p class="card-text">Voto: <?php echo $voto ?></p>
             <p class="card-text">Distanza dal centro: <?php echo $distanza_dal_centro ?> km</p>
