@@ -53,27 +53,25 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </head>
 <body>
-  <div class="container">
+  <div class="container d-flex pt-5">
     
-    <?php foreach($hotels as $hotel) :
+    <?php foreach($hotels as $hotel) : 
       $nome_albergo = $hotel['name'];
       $descrizione = $hotel['description'];
       $parcheggio = $hotel['parking'] ? 'si' : 'no';
       $voto = $hotel['vote'];
       $distanza_dal_centro = $hotel['distance_to_center'];
       ?>
-      <ul class="fw-bold">
-      "<?php echo $nome_albergo ?>" 
-          <li class="fw-light">           
-            "<?php echo $descrizione ?>" -
-            "<?php echo $parcheggio ?>" -
-            "<?php echo $voto ?>" -
-            "<?php echo $distanza_dal_centro ?>" -
-          </li>
-
-      </ul>  
+        <div class="card me-3" style="width: 18rem;">
+          <div class="card-body text-center ">
+            <h5 class="card-title"><?php echo $nome_albergo ?></h5>
+            <h6 class="card-subtitle mb-2 text-body-secondary"><?php echo $descrizione ?></h6>
+            <p class="card-text">Parcheggio: <?php echo $parcheggio ?></p>
+            <p class="card-text">Voto: <?php echo $voto ?></p>
+            <p class="card-text">Distanza dal centro: <?php echo $distanza_dal_centro ?> km</p>
+          </div>
+        </div>
     <?php endforeach ?>
-    
   </div>
 </body>
 </html>
